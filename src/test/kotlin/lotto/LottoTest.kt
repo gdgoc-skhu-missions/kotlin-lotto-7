@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.model.Lotto
+import lotto.util.NumberValidator
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -18,6 +20,19 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
     }
-
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+
+    @Test
+    fun `당첨 번호가 숫자가 아니면 예외를 발생시킨다`() {
+        assertThrows<IllegalArgumentException> {
+            NumberValidator.checkLottoIsNumber(listOf("qwer"))
+        }
+    }
+
+    @Test
+    fun `당첨 번호가 1~45 사이의 숫자가 아니면 예외를 발생시킨다`() {
+        assertThrows<IllegalArgumentException> {
+            NumberValidator.checkRangeLotto(listOf("100"))
+        }
+    }
 }
